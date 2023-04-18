@@ -1,0 +1,77 @@
+@import 'mingcute_icon/font/Mingcute.css';
+.mgc_IDcard_fill:before {
+    content: "\ec4a";
+    color: #000B14;
+    font-size: 2.7rem;
+  }
+  .mgc_arrow_left_line:before {
+    content: "\e949";
+    color: #020A12;
+    font-size: 30px;
+    vertical-align: bottom;
+  }
+  .mgc_mail_send_fill:before {
+    content: "\ecd6";
+    color: #E30101;
+    font-size: 30px;
+    vertical-align: sub;
+  }
+  .mgc_delete_2_line:before {
+    content: "\eaa5";
+    color: #020A12BD;
+    font-size: 20px;
+  }
+  .mgc_information_line:before {
+    content: "\ec57";
+    font-size: 20px;
+    color: #020A12BD;
+  }
+  .mgc_download_2_line:before {
+    content: "\eadf";
+    font-size: 20px;
+    color: #020A12BD;
+  }
+  .mgc_refresh_2_line:before {
+    content: "\edeb";
+    font-size: 24px;
+    color: #020A12BD;
+    cursor: pointer;
+  }
+  .mgc_check_circle_fill:before {
+    content: "\ea1e";
+    color: #4DBE6D;
+    font-size: 24px !important;
+    vertical-align: bottom;
+    padding-right: 12px;
+  }
+  .mgc_close_line:before {
+    content: "\ea37";
+    color:  #020A12 !important;
+    font-size: 20px !important;
+    /* padding-left: 24px !important; */
+    cursor: pointer;
+  }
+  .mgc_pic_line:before {
+    content: "\ed9f";
+    color: rgba(2, 10, 18, 0.6);
+    font-size: 24px !important;
+    vertical-align: middle;
+    margin-left: -31px;
+    padding: 9px;
+    border: 1px solid #EEEEEE !important;
+    border-radius: 8px !important;
+    cursor: pointer;
+  }
+  .mgc_add_circle_line:before {
+    content: "\e903";
+    color: #2495FE;
+    font-size: 19px;
+    vertical-align: middle;
+  }
+  .mgc_close_circle_fill:before {
+    content: "\ea34" !important;
+    color: #EB5757 !important;
+    font-size: 24px !important;
+    vertical-align: bottom;
+    padding-right: 12px;
+  }

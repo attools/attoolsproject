@@ -133,7 +133,7 @@ const Junior = (props) => {
                     </div>
                 </Col>
             </div>
-            <div className='custom-display-none'>
+            <div className='custom-display-non'>
                 <div className='download-imgs' id={createdt}>
                     <div className='download-junior'>
                         <Row>
@@ -148,11 +148,11 @@ const Junior = (props) => {
 
                         <Row className='row-img'>
                             {juniordetails.map((details, idx) => (
-                                <Col key={idx} xs={juniordetails.length === (1) ? "12" : null && juniordetails.length === 3 ? "4" : "6" && juniordetails.length === 6 ? "4" : "6" && juniordetails.length === 5 ? "4" : "6"}
-                                    sm={juniordetails.length === (1) ? "12" : null && juniordetails.length === 3 ? "4" : "6" && juniordetails.length === 6 ? "4" : "6" && juniordetails.length === 5 ? "4" : "6"}
-                                    md={juniordetails.length === (1) ? "12" : null && juniordetails.length === 3 ? "4" : "6" && juniordetails.length === 6 ? "4" : "6" && juniordetails.length === 5 ? "4" : "6"}
-                                    lg={juniordetails.length === (1) ? "12" : null && juniordetails.length === 3 ? "4" : "6" && juniordetails.length === 6 ? "4" : "6" && juniordetails.length === 5 ? "4" : "6"}
-                                    className={"pt-4 text-center"}>
+                                <Col xs={(juniordetails.length === 1) ? "12" : ((juniordetails.length === 3) ? "4" : ((juniordetails.length === 6) ? "4" : "6"))}
+                                md={(juniordetails.length === 1) ? "12" : ((juniordetails.length === 3) ? "4" : ((juniordetails.length === 6) ? "4" : ((juniordetails.length === 5) ? "4" : "6")))}
+                                lg={(juniordetails.length === 1) ? "12" : ((juniordetails.length === 3) ? "4" : ((juniordetails.length === 6) ? "4" : ((juniordetails.length === 5) ? "4" : "6")))}
+                                key={idx}
+                                className={"pt-4 text-center"}>
                                     <img
                                         width="185px"
                                         height="185px"

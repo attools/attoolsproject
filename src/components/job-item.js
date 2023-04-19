@@ -175,7 +175,7 @@ export default function JobItems(props) {
         </Col>
       </div>
       <div className="custom-display-none">
-        <div className="download-img" id={rolename}>
+        <div className="download-img-senior" id={rolename}>
           <Container className="download-contained">
             <Row>
               <img src={cardlogo} alt="card-logo" width="250" />

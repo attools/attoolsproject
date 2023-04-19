@@ -16,15 +16,17 @@ import { Col, Row } from "react-bootstrap";
 import { useFetchCollection } from "../components/getfirebasedata";
 import { collection, doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
+import SeniorAnniversaryPost from "../components/add-senioranniversary";
 
 function Menubar() {
   const [show, setShow] = useState(false);
   const location = useLocation();
   const [showAddmsg, setAddmsg] = useState(false);
   const [showjuniorToast, setJuniorToast] = useState(false);
+  const [showseniorToast, setSeniorToast] = useState(false);
   const [showpopover, setPopoverShow] = useState(false);
   const [popovertarget, setPopTarget] = useState(null);
-  const [showSeniorpost, setshowSeniorModal] = useState(false);
+  const [showSeniorPost, setshowSeniorModal] = useState(false);
   const [showJuniorPost, setshowJuniorModal] = useState(false);
   const ref = useRef(null);
 
@@ -44,8 +46,19 @@ function Menubar() {
       setJuniorToast(false)
     }, 3000);
   }
+
+  const closeSeniorModal = (data) => {
+    setSeniorToast(true);
+    // console.log("dta", data);
+    setshowSeniorModal(data);
+    setTimeout(() => {
+      setSeniorToast(false)
+    }, 3000);
+  }
+
   const closeAddDialog = (data) => { setShow(data) }
   const closejuniorDialog = (data) => { setshowJuniorModal(data) }
+  const closeseniorDialog = (data) => { setshowSeniorModal(data) }
   const enabledNav = !_.isNil(location.state) || location.pathname === '/joblist' ? true : false;
   const iconName = !_.isNil(location.state) ? location?.state?.icon : '';
   const navtitle = !_.isNil(location.state) ? location?.state?.title : "";
@@ -177,7 +190,15 @@ function Menubar() {
           message={`Junior's Anniversary Post Created Successfully`}
         />
       }
+      {
+        showseniorToast && <AppToast
+          showAleart={showseniorToast}
+          icon="mgc_check_circle_fill"
+          message={`Senior's Anniversary Post Created Successfully`}
+        />
+      }
       {showJuniorPost && <JuniorAnniversaryPost showModal={showJuniorPost} closeJuniorModal={closeJuniorModal} title="Junior" closejuniorDialog={closejuniorDialog} />}
+      {showSeniorPost && <SeniorAnniversaryPost showModal={showSeniorPost} closeSeniorModal={closeSeniorModal} title="Senior" closeseniorDialog={closeseniorDialog} />}
     </div>
   );
 }

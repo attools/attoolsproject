@@ -19,6 +19,7 @@ export default function Joblistpage() {
   const [roleName, setRolename] = useState(null);
   const [enableempty, setEmpty] = useState(true);
   // const {jobList} = useSelector((state) => state.joblist);
+  console.log("job list :",jobListArr);
   const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
@@ -31,6 +32,7 @@ export default function Joblistpage() {
     setJoblist(getJoblist);
   },[location.state?.data]);
   dispatch(updateJobPost(localStorage.getItem("JOBPOSTLISTS")));
+
   const deleteItem = (index, rolename) => {
     setRolename(rolename);
     setAlert(true);
@@ -48,6 +50,7 @@ export default function Joblistpage() {
       setAlert(false);
     }, 3000);
   };
+  
   const refreshPage=()=>{
     setEmpty(true);
     const getJoblist = !_.isNil(localStorage.getItem("JOBPOSTLISTS")) ? localStorage.getItem("JOBPOSTLISTS") : [];

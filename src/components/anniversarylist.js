@@ -18,8 +18,9 @@ export default function AnniversaryList() {
   const [enableempty, setEmpty] = useState(true);
   const [juniorName, setJuniorname] = useState(null);
   const [showAlert, setAlert] = useState(false);
+  const [At,SetAt]=useState(null)
   const dispatch = useDispatch();
-  console.log("new", juniorName);
+
   useEffect(() => {
     setTimeout(() => {
       setEmpty(false);
@@ -32,22 +33,22 @@ export default function AnniversaryList() {
   }, [location.state?.data])
   dispatch(updateAnniversaryPost(localStorage.getItem("JuniorAnniversaryList")));
 
-  const deletetem = (index, juniordetails) => {
-    setJuniorname(juniordetails);
+  const deleteJunior= (index, createdt) => {
+    SetAt(createdt);
     setAlert(true);
-    var deletePost = [];
-    JSON.parse(JuniorAnniversaryList).map((ele, idx) => {
-      if (idx !== index) {
-        deletePost.push(ele);
+    var deletePos = [];
+    JSON.parse(JuniorAnniversaryList).map((ele,idx)=>{
+      if(idx !== index){
+        deletePos.push(ele);
       }
-      return deletePost;
+      return deletePos
     });
     localStorage.removeItem("JuniorAnniversaryList");
-    localStorage.setItem("JuniorAnniversaryList", JSON.stringify(deletePost));
+    localStorage.setItem("JuniorAnniversaryList", JSON.stringify(deletePos));
     setJuniorList(localStorage.getItem("JuniorAnniversaryList"));
-    setTimeout(() => {
+    setTimeout(()=>{
       setAlert(false);
-    }, 3000);
+    }, 3000)
   };
   
   console.log(JuniorAnniversaryList);
@@ -75,7 +76,7 @@ export default function AnniversaryList() {
             <Grid container>
               {JSON.parse(JuniorAnniversaryList).map((ele, idx) => (
                 <Grid item xs={12} key={idx} sm={12} md={4} lg={3}>
-                  <Junior anniversaryitems={ele} itemIndex={idx} key={idx} deleteItem={deletetem}></Junior>
+                  <Junior anniversaryitems={ele} itemIndex={idx} key={idx} deleteJunior={deleteJunior}></Junior>
                 </Grid>
               ))}
             </Grid>

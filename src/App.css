@@ -5,6 +5,8 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.cdnfonts.com/css/helvetica-neue-9');
+@import url('https://fonts.cdnfonts.com/css/roland');
+
 body {
   width: 100% !important;
   height: 100% !important;
@@ -694,4 +696,56 @@ color: rgba(0, 0, 0, 0.74);
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+.download-imgs{
+  min-height: 1080px !important;
+  min-width: 1080px !important;
+  height: auto !important;
+  background-color: white !important;
+  background-image: url(./assets/junior.png);
+  background-size: cover;
+  background-position: center;
+}
+.align-head{
+margin-left: 33.5% !important;
+}
+.quote-text{
+  color: #EC615B;
+  font-family: 'Roland', sans-serif !important;
+  font-weight: 900;
+  font-size: 35px;  
+  padding-top: 40px;
+  padding-left: 150px !important;
+  padding-right: 150px !important;
+  text-align: center !important;
+}
+.download-junior{
+  margin: 0px !important;
+  padding-top: 104px !important;
+  padding-left: 30px !important;
+}
+.download-name{
+  font-family: 'Readex Pro' !important;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 25px;
+  text-align: center;
+}
+.download-role{
+  font-family: 'Inter' !important;
+  font-style: normal;
+  font-weight: 300;
+  text-align: center;
+}
+.row-img{
+  /* padding-left: 80px !important; */
+  padding-top: 100px !important;
+}
+.anniversary-footer{
+  padding: 20px !important;
+  background: #FFFFFF !important;
+  border-top: 1px solid #EEEEEE !important;
+  border-radius: 26px !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }

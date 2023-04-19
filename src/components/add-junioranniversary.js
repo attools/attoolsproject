@@ -74,6 +74,47 @@ export default function JuniorAnniversaryPost(props) {
     navigate('/anniversarylist',{replace:true,state:{data:localStorage.getItem('JuniorAnniversaryList')}})
     props.closeJuniorModal(false);
   };
+  const handleImageChange = (e, index) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    const image = new Image();
+    reader.onload = (event) => {
+      image.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        const maxWidth = 800; // Maximum width of the compressed image
+        const maxHeight = 800; // Maximum height of the compressed image
+        let width = image.width;
+        let height = image.height;
+  
+        // Calculate the new dimensions while maintaining the aspect ratio
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+        if (height > maxHeight) {
+          width *= maxHeight / height;
+          height = maxHeight;
+        }
+  
+        // Set the canvas dimensions to the new dimensions
+        canvas.width = width;
+        canvas.height = height;
+  
+        // Draw the image on the canvas
+        ctx.drawImage(image, 0, 0, width, height);
+  
+        // Convert the canvas data to a compressed data URL
+        const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.8); // Change the compression quality as needed
+  
+        // Update the form values with the compressed data URL
+        setValue(`juniordetails.${index}.empimgurl`, compressedDataUrl);
+      };
+      image.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+  
   const addItem = () => {
     append({
       empimage: null,
@@ -173,14 +214,7 @@ export default function JuniorAnniversaryPost(props) {
                                         )}
                                         accept="image/png, image/jpeg"
                                         className="form-control form-input-file"
-                                        onChange={(e) => {
-                                          setValue(
-                                            `juniordetails.${index}.empimgurl`,
-                                            URL.createObjectURL(
-                                              e.target.files[0]
-                                            )
-                                          );
-                                        }}
+                                        onChange={(e) => handleImageChange(e, index)}
                                       ></input>
                                     }
                                     {!_.isNil(fields[index].empimgurl) ? (
@@ -188,7 +222,7 @@ export default function JuniorAnniversaryPost(props) {
                                         src={fields[index].empimgurl}
 
                                         height="30"
-                                        alt={"emp img"}
+                                        alt={`Employee Image ${index}`}
                                       />
                                     ) : (
                                       <span className="mgc_pic_line"></span>

@@ -19,7 +19,6 @@ const Junior = (props) => {
     const [showLoader, setLoader] = useState(false);
     const [showDelete, setDelete] = useState(false);
     const [showInfo, setViewInfo] = useState(false);
-    const [lg, setLg] = useState();
     const downloadAnniversary = () => {
         setLoader(true);
         htmlToImage
@@ -141,7 +140,10 @@ const Junior = (props) => {
                             <span className='align-head'><img src={cardlogo} width="250" /></span>
                         </Row>
                         <Row>
+                            <Col sm="12" lg="12" xs="12" md="12">
                             <p className='quote-text'>{quote}</p>
+                            </Col>
+                            
                         </Row>
 
                         <Row className='row-img'>

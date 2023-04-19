@@ -25,6 +25,7 @@ export default function JuniorAnniversaryPost(props) {
     juniordetails: yup.array().of(
       yup.object().shape({
         empimage: yup.string().required("Please select employee image"),
+        empimgurl: yup.string().required("Please select employee image"),
         empname: yup.string().required("Please enter employee name"),
         empdesignation: yup.string().required("Please enter employee designation"),
       })

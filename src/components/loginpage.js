@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { useForm } from "react-hook-form";
@@ -11,10 +11,16 @@ import loginbgimg from "../assets/loginbg.png";
 import logo from "../assets/menu-logo.svg";
 import AppToast from '../components/app-toast';
 import { useNavigate } from "react-router-dom";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase/config";
+import { AppContext } from "../App";
 
 export default function LoginPage() {
+
   const navigate = useNavigate();
-  const [loginSuccessed,setLoginsuccess] =  useState(false);
+  const [loginSuccessed, setLoginsuccess] = useState(false);
+  const { handleLoginSuccess } = useContext(AppContext);
+
 
   const {
     register,
@@ -22,8 +28,8 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
   const { fbdbdata: Logindata } = useFetchCollection("loginDetails");
-  const [showloginValidation,setvalidation] = useState(false);
-  useEffect(() => {}, []);
+  const [showloginValidation, setvalidation] = useState(false);
+  useEffect(() => { }, []);
   function onSubmit(data) {
     if (!_.isNil(data) && !_.isNil(Logindata)) {
       setvalidation(
@@ -48,8 +54,25 @@ export default function LoginPage() {
     setTimeout(() => {
       setvalidation(false);
     }, 3000);
-    if(loginSuccessed)navigate('/home');
+    if (loginSuccessed) {
+      let userId = Logindata[0].id
+      const user = doc(db, 'loginDetails', userId)
+      updateDoc(user, {
+        loggedin: true
+      })
+      localStorage.setItem('loginToken', JSON.stringify(Logindata));
+      navigate('/home');
+    }
   }
+
+  useEffect(() => {
+    if (Logindata) {
+      if (Logindata[0].loggedin) {
+        navigate('/home')
+      }
+    }
+  }, [Logindata])
+
   return (
     <React.Fragment>
       <Box
@@ -57,7 +80,7 @@ export default function LoginPage() {
         className="login-header-container"
       >
         <Grid container rowSpacing={1} columnSpacing={{ xs: 0, sm: 0, md: 0 }}>
-          <Grid item xs={7} className="p-t-0 login-container">
+          <Grid item xs={12} md={7} className="p-t-0 login-container">
             <Container className="p-a-24">
               <Row>
                 <Col className="p-a-12">
@@ -76,7 +99,7 @@ export default function LoginPage() {
               </Row>
               <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                 <Row>
-                  <Col className="p-a-12">
+                  <Col className="p-a-12 pb-0">
                     <div className="">
                       <label htmlFor="email">Email</label>
                     </div>
@@ -90,14 +113,16 @@ export default function LoginPage() {
                         id="email"
                         placeholder="Email"
                       />
-                      {errors.email && (
-                        <span className="error-span">Email id is Required</span>
-                      )}
+                      <div className="error-container">
+                        {errors.email && (
+                          <span className="error-span">Email id is Required</span>
+                        )}
+                      </div>
                     </div>
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="p-a-12">
+                  <Col className="p-a-12 pt-0 pb-1">
                     <div className="">
                       <label htmlFor="password">Password</label>
                     </div>
@@ -111,18 +136,21 @@ export default function LoginPage() {
                           required: true,
                         })}
                       />
-                      {errors.password && (
-                        <span className="error-span">Password is Required</span>
-                      )}
+                      <div className="error-container">
+                        {errors.password && (
+                          <span className="error-span">Password is Required</span>
+                        )}
+                      </div>
                     </div>
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="p-a-12">
+                  <Col className="p-a-12 pt-0">
                     <input
                       value={"Sign in"}
                       type="submit"
                       className="create-btn"
+                      onClick={() => handleLoginSuccess()}
                     />
                   </Col>
                 </Row>
@@ -145,8 +173,8 @@ export default function LoginPage() {
               </Row>
             </Container>
           </Grid>
-          <Grid item xs={5} className="p-t-0">
-            <div className="">
+          <Grid xs={5} md={5} item className="p-t-0">
+            <div className="login-bg-container">
               <img
                 className="login-bg-img"
                 src={loginbgimg}
@@ -158,14 +186,15 @@ export default function LoginPage() {
           </Grid>
         </Grid>
       </Box>
-      {showloginValidation&&
-      (
-        <AppToast
-          showAleart={showloginValidation}
-          icon="mgc_close_circle_fill"
-          message={`Email or Password is wrong !`}
-        />
-      )}
+      {showloginValidation &&
+        (
+          <AppToast
+            showAleart={showloginValidation}
+            icon="mgc_close_circle_fill"
+            message={`Email or Password is wrong !`}
+          />
+        )}
+
     </React.Fragment>
   );
 }

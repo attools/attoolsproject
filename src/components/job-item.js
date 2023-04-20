@@ -42,7 +42,7 @@ export default function JobItems(props) {
       });
   }
   const deletePost = () => {
-    props.deleteItem(itemIndex);
+    props.deleteItem(itemIndex, rolename);
     setDelete(false)
   }
   return (

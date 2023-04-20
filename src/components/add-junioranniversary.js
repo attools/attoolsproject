@@ -72,7 +72,7 @@ export default function JuniorAnniversaryPost(props) {
     existingData.unshift(data);
     console.log(existingData);
     localStorage.setItem("JuniorAnniversaryList", JSON.stringify(existingData));
-    navigate('/anniversarylist', { replace: true, state: { data: localStorage.getItem('JuniorAnniversaryList') } })
+    navigate('/anniversarylist', { replace: true, state: { title: "Work anniversary", data: localStorage.getItem('JuniorAnniversaryList') } })
     props.closeJuniorModal(false);
   };
   const handleImageChange = (e, index) => {
@@ -226,10 +226,9 @@ export default function JuniorAnniversaryPost(props) {
                                         alt={`Employee Image ${index}`}
                                       />
                                     ) : (
-                                        <span className={errors?.juniordetails?.[index]
-                                          ?.empimage?.message ? 'mgc_pic_line_error' : 'mgc_pic_line'}>
-
-                                        </span>
+                                      <span className={errors?.juniordetails?.[index]
+                                        ?.empimage?.message ? 'mgc_pic_line_error' : 'mgc_pic_line'}>
+                                      </span>
                                     )}
                                   </TableCell>
                                   <TableCell align="left">

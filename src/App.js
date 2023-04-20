@@ -11,11 +11,31 @@ import LoginPage from './components/loginpage';
 import { useLocation } from 'react-router-dom';
 import ProtectedRoute from './components/rbaccontrol/producted-route';
 import {useFetchCollection} from './components/getfirebasedata';
+
+import { createContext, useEffect, useState } from 'react';
+
+export const AppContext = createContext();
+
 function App() {
 const navigate = useLocation();
 const { fbdbdata: Logindata } = useFetchCollection("loginDetails");
+
+  const [loginSuccess, setLoginSuccess] = useState();
+
+  const handleLoginSuccess = () => {
+    if(Logindata){
+      setLoginSuccess(true)
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoginSuccess(false)
+    }, 1500);
+  },[loginSuccess]);
 console.log("Logindata",Logindata);
   return (
+    <AppContext.Provider value={{loginSuccess, handleLoginSuccess, Logindata}}>
     <div className="App">
       {navigate.pathname !== '/' && <Menubar />}
       {/* <Menubar /> */}
@@ -31,6 +51,7 @@ console.log("Logindata",Logindata);
       </div>
       {/* <Footerbar /> */}
     </div>
+    </AppContext.Provider>
   );
 }
 

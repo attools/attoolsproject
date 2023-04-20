@@ -21,7 +21,6 @@ const Junior = (props) => {
     const [showDelete, setDelete] = useState(false);
     const [showInfo, setViewInfo] = useState(false);
     const [showAlert, setAlert] = useState(false);
-    const[deleteAlert,setDeleteAlert] = useState(false)
     const downloadAnniversary = () => {
         setLoader(true);
         htmlToImage
@@ -39,13 +38,10 @@ const Junior = (props) => {
             })
     }
     const deletePost = () => {
-        props.deleteJunior(itemIndex)
+        props.deleteJunior(itemIndex, createdt)
         setDelete(false);
-        setDeleteAlert(true);
-        setTimeout(() => {
-            setDeleteAlert(false);
-        }, 3000)
     }
+
     return (
         <div>
             {showAlert && (
@@ -55,8 +51,6 @@ const Junior = (props) => {
                     message={`${moment(`${createdt}`).format("LLL")} post Downloaded Successfully`}
                 />
             )}
-            {deleteAlert &&
-                <AppToast showAleart={deleteAlert} icon="mgc_check_circle_fill" message={`${moment(`${createdt}`).format("LLL")} created post deleted successfully`} />}
             {showDelete && (
                 <Dialog
                     open={showDelete}

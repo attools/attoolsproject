@@ -1,17 +1,16 @@
 import { Navigate } from "react-router";
 import { useFetchCollection } from "../getfirebasedata";
 import _ from "lodash";
+import { useContext } from "react";
+import { AppContext } from "../../App";
 
 function ProtectedRoute({ children }) {
-  const { fbdbdata: Logindata } = useFetchCollection("loginDetails");
-  console.log("producted routes",Logindata);
-  const loggedIn = !_.isNil(Logindata) ? Logindata[0].loggedin: true;
-  console.log("loggedIn",loggedIn);
-  if (!loggedIn) {
+  const { Logindata } = useContext(AppContext)
+  const loggedIn = Logindata ? Logindata[0].loggedin: false;
+  if (loggedIn === false) {
     return <Navigate to="/" />;
   }
-  if (loggedIn) {
-    <Navigate to="/home" />;
+  else if (loggedIn === true) {
     return children;
   }
 }

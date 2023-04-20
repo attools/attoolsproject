@@ -51,6 +51,17 @@
     /* padding-left: 24px !important; */
     cursor: pointer;
   }
+  .mgc_pic_line_error:before {
+    content: "\ed9f";
+    color: #f00;
+    font-size: 24px !important;
+    vertical-align: middle;
+    margin-left: -31px;
+    padding: 9px;
+    border: 1px solid #f00 !important;
+    border-radius: 8px !important;
+    cursor: pointer;
+  }
   .mgc_pic_line:before {
     content: "\ed9f";
     color: rgba(2, 10, 18, 0.6);

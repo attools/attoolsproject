@@ -259,7 +259,7 @@ export default function JobItems(props) {
           dialogClassName="modal-90w sm-modal-box"
           onHide={() => setViewInfo(false)}
         >
-          <Modal.Header className="sm-header-title">Info</Modal.Header>
+          <Modal.Header className="sm-header-title" closeButton>Info</Modal.Header>
           <Modal.Body className="p-a-24">
             <Row>
               <Col>

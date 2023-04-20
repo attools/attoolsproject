@@ -62,7 +62,7 @@ export default function JuniorAnniversaryPost(props) {
   const closeAddDialog = () => {
     props.closejuniorDialog(false);
   };
-
+  console.log('errorMsg', errors?.juniordetails?.empimage);
   const onSubmit = async (data) => {
     data['createdt'] = new Date();
     data['type'] = "Junior";
@@ -72,7 +72,7 @@ export default function JuniorAnniversaryPost(props) {
     existingData.unshift(data);
     console.log(existingData);
     localStorage.setItem("JuniorAnniversaryList", JSON.stringify(existingData));
-    navigate('/anniversarylist',{replace:true,state:{data:localStorage.getItem('JuniorAnniversaryList')}})
+    navigate('/anniversarylist', { replace: true, state: { data: localStorage.getItem('JuniorAnniversaryList') } })
     props.closeJuniorModal(false);
   };
   const handleImageChange = (e, index) => {
@@ -87,7 +87,7 @@ export default function JuniorAnniversaryPost(props) {
         const maxHeight = 800; // Maximum height of the compressed image
         let width = image.width;
         let height = image.height;
-  
+
         // Calculate the new dimensions while maintaining the aspect ratio
         if (width > maxWidth) {
           height *= maxWidth / width;
@@ -97,17 +97,17 @@ export default function JuniorAnniversaryPost(props) {
           width *= maxHeight / height;
           height = maxHeight;
         }
-  
+
         // Set the canvas dimensions to the new dimensions
         canvas.width = width;
         canvas.height = height;
-  
+
         // Draw the image on the canvas
         ctx.drawImage(image, 0, 0, width, height);
-  
+
         // Convert the canvas data to a compressed data URL
         const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.8); // Change the compression quality as needed
-  
+
         // Update the form values with the compressed data URL
         setValue(`juniordetails.${index}.empimgurl`, compressedDataUrl);
       };
@@ -115,7 +115,7 @@ export default function JuniorAnniversaryPost(props) {
     };
     reader.readAsDataURL(file);
   };
-  
+
   const addItem = () => {
     append({
       empimage: null,
@@ -226,7 +226,10 @@ export default function JuniorAnniversaryPost(props) {
                                         alt={`Employee Image ${index}`}
                                       />
                                     ) : (
-                                      <span className="mgc_pic_line"></span>
+                                        <span className={errors?.juniordetails?.[index]
+                                          ?.empimage?.message ? 'mgc_pic_line_error' : 'mgc_pic_line'}>
+
+                                        </span>
                                     )}
                                   </TableCell>
                                   <TableCell align="left">

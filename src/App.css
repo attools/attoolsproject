@@ -720,7 +720,7 @@ margin-left: 38% !important;
 .quote-text{
   color: #EC615B;
   font-family: 'Roland' ;
-  font-weight: 100;
+  font-weight: 50;
   font-size: 35px;  
   padding-top: 40px;
   padding-left: 120px !important;
@@ -758,4 +758,21 @@ margin-left: 38% !important;
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
   z-index: 1;
+}
+.red-border {
+  border: 2px solid red;
+}
+.btn-close {
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3E%3C/svg%3E") 50%/1em auto no-repeat #0000;
+  background-size: cover;
+  border: 0 !important;
+  border-radius: 0.375rem !important;
+  box-sizing: initial !important;
+  color: #020A12BD !important;
+  height: 14.73px !important;
+  opacity: 1 !important;
+  padding: 2px !important;
+  position: relative;
+  top: 7px;
+  width: 14.73px !important;
 }

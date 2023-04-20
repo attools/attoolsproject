@@ -11,13 +11,12 @@ import _ from "lodash";
 import { useLocation } from "react-router-dom";
 import { updateAnniversaryPost } from "../slices/anniversarySlice";
 import emptystate from "../assets/emptystate.svg";
+import Switch from '@mui/material/Switch';
 
 export default function AnniversaryList() {
   const location = useLocation();
   const [JuniorAnniversaryList, setJuniorList] = useState([]);
   const [enableempty, setEmpty] = useState(true);
-  const [juniorName, setJuniorname] = useState(null);
-  const [showAlert, setAlert] = useState(false);
   const [At,SetAt]=useState(null)
   const dispatch = useDispatch();
 
@@ -29,13 +28,11 @@ export default function AnniversaryList() {
     setJuniorList(getanniversarylist);
 
 
-  console.log('Hii Tiu',JuniorAnniversaryList);
   }, [location.state?.data])
   dispatch(updateAnniversaryPost(localStorage.getItem("JuniorAnniversaryList")));
 
   const deleteJunior= (index, createdt) => {
     SetAt(createdt);
-    setAlert(true);
     var deletePos = [];
     JSON.parse(JuniorAnniversaryList).map((ele,idx)=>{
       if(idx !== index){
@@ -46,17 +43,11 @@ export default function AnniversaryList() {
     localStorage.removeItem("JuniorAnniversaryList");
     localStorage.setItem("JuniorAnniversaryList", JSON.stringify(deletePos));
     setJuniorList(localStorage.getItem("JuniorAnniversaryList"));
-    setTimeout(()=>{
-      setAlert(false);
-    }, 3000)
   };
-  
-  console.log(JuniorAnniversaryList);
+
 
   return (
     <div className="">
-      {showAlert &&
-        <AppToast showAleart={showAlert} icon="mgc_check_circle_fill" message={`Junior Anniversary post deleted successfully`} />}
       {enableempty ? <SkeletonPage /> : JuniorAnniversaryList.length === 0 || JuniorAnniversaryList === "[]" ? (
         <div className="empty-state">
           <div className="custom-center">
@@ -67,8 +58,11 @@ export default function AnniversaryList() {
       ) : (
         <div className="">
           <Row>
-            <Col>
+            <Col lg={6}>
               <p className="p-recents">Recents</p>
+            </Col>
+            <Col lg={6} className="text-right">
+            <Switch  defaultChecked />
             </Col>
           </Row>
           <Box sx={{ flexGrow: 1 }}>

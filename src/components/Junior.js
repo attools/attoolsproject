@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import Card from "react-bootstrap/Card";
 import cardlogo from '../assets/tenant-logo.png';
 import * as htmlToImage from 'html-to-image';
@@ -12,6 +12,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import AppToast from '../components/app-toast';
 
 const Junior = (props) => {
     const { createdt, type, juniordetails, quote } = props.anniversaryitems;
@@ -19,24 +20,43 @@ const Junior = (props) => {
     const [showLoader, setLoader] = useState(false);
     const [showDelete, setDelete] = useState(false);
     const [showInfo, setViewInfo] = useState(false);
+    const [showAlert, setAlert] = useState(false);
+    const[deleteAlert,setDeleteAlert] = useState(false)
     const downloadAnniversary = () => {
         setLoader(true);
         htmlToImage
             .toJpeg(document.getElementById(createdt), { quality: 1, height: 1080, width: 1080, backgroundColor: 'white' })
             .then(function (dataUrl) {
                 var link = document.createElement("a");
-                link.download = `${type}.png`;
+                link.download = `${moment(`${createdt}`).format("LLL")}.png`;
                 link.href = dataUrl;
                 link.click();
                 setLoader(false);
+                setAlert(true);
+                setTimeout(() => {
+                    setAlert(false);
+                }, 3000);
             })
     }
     const deletePost = () => {
         props.deleteJunior(itemIndex)
         setDelete(false);
+        setDeleteAlert(true);
+        setTimeout(() => {
+            setDeleteAlert(false);
+        }, 3000)
     }
     return (
         <div>
+            {showAlert && (
+                <AppToast
+                    showAleart={showAlert}
+                    icon="mgc_check_circle_fill"
+                    message={`${moment(`${createdt}`).format("LLL")} post Downloaded Successfully`}
+                />
+            )}
+            {deleteAlert &&
+                <AppToast showAleart={deleteAlert} icon="mgc_check_circle_fill" message={`${moment(`${createdt}`).format("LLL")} created post deleted successfully`} />}
             {showDelete && (
                 <Dialog
                     open={showDelete}
@@ -89,7 +109,7 @@ const Junior = (props) => {
                                         <Col xs={juniordetails.length === (1) ? "12" : "6" && juniordetails.length === 3 ? "4" : "6" && juniordetails.length === 6 ? "4" : "6"}
                                             md={juniordetails.length === (1) ? "12" : "6" && juniordetails.length === 3 ? "4" : "6" && juniordetails.length === 6 ? "4" : "6" && juniordetails.length === 5 ? "4" : "6"}
                                             lg={juniordetails.length === (1) ? "12" : "6" && juniordetails.length === 3 ? "4" : "6" && juniordetails.length === 6 ? "4" : "6" && juniordetails.length === 5 ? "4" : "6"}
-                                            key={idx} className={"pt-4"}>
+                                            key={idx} className={"pt-2"}>
                                             <img
                                                 width="59px"
                                                 height="59px"
@@ -133,7 +153,7 @@ const Junior = (props) => {
                     </div>
                 </Col>
             </div>
-            <div className='custom-display-non'>
+            <div className='custom-display-none'>
                 <div className='download-imgs' id={createdt}>
                     <div className='download-junior'>
                         <Row>
@@ -141,18 +161,18 @@ const Junior = (props) => {
                         </Row>
                         <Row>
                             <Col sm="12" lg="12" xs="12" md="12">
-                            <p className='quote-text'>{quote}</p>
+                                <p className='quote-text'>{quote}</p>
                             </Col>
-                            
+
                         </Row>
 
                         <Row className='row-img'>
                             {juniordetails.map((details, idx) => (
                                 <Col xs={(juniordetails.length === 1) ? "12" : ((juniordetails.length === 3) ? "4" : ((juniordetails.length === 6) ? "4" : "6"))}
-                                md={(juniordetails.length === 1) ? "12" : ((juniordetails.length === 3) ? "4" : ((juniordetails.length === 6) ? "4" : ((juniordetails.length === 5) ? "4" : "6")))}
-                                lg={(juniordetails.length === 1) ? "12" : ((juniordetails.length === 3) ? "4" : ((juniordetails.length === 6) ? "4" : ((juniordetails.length === 5) ? "4" : "6")))}
-                                key={idx}
-                                className={"pt-4 text-center"}>
+                                    md={(juniordetails.length === 1) ? "12" : ((juniordetails.length === 3) ? "4" : ((juniordetails.length === 6) ? "4" : ((juniordetails.length === 5) ? "4" : "6")))}
+                                    lg={(juniordetails.length === 1) ? "12" : ((juniordetails.length === 3) ? "4" : ((juniordetails.length === 6) ? "4" : ((juniordetails.length === 5) ? "4" : "6")))}
+                                    key={idx}
+                                    className={"pt-4 text-center"}>
                                     <img
                                         width="185px"
                                         height="185px"
@@ -174,7 +194,7 @@ const Junior = (props) => {
                     dialogClassName="modal-90w sm-modal-box"
                     onHide={() => setViewInfo(false)}
                 >
-                    <Modal.Header className="sm-header-title">Info</Modal.Header>
+                    <Modal.Header className="sm-header-title" closeButton>Info</Modal.Header>
                     <Modal.Body className="p-a-24">
                         <Row>
                             <Col>

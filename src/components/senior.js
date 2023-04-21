@@ -46,7 +46,7 @@ const Senior = (props) => {
             .toJpeg(document.getElementById(createdt), { quality: 1, height: 1080, width: 1080, backgroundColor: 'white' })
             .then(function (dataUrl) {
                 var link = document.createElement("a");
-                link.download = `${moment(`${createdt}`).format("LLL")}.png`;
+                link.download = `${empname}.png`;
                 link.href = dataUrl;
                 link.click();
                 setLoader(false);
@@ -66,7 +66,7 @@ const Senior = (props) => {
                 <AppToast
                     showAleart={showAlert}
                     icon="mgc_check_circle_fill"
-                    message={`${empname} Job post Downloaded Successfully`}
+                    message={`${empname}'s anniversary post Downloaded Successfully`}
                 />
             )}
             {showDelete && (
@@ -209,8 +209,8 @@ const Senior = (props) => {
                                                             <img
                                                                 src={senior?.empimgurl}
                                                                 alt="empprofile"
-                                                                height='800px'
-                                                                width='500px'
+                                                                height='900px'
+                                                                width='600px'
                                                             />
                                                         </div>
                                                     </Col>

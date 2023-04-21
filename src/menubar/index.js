@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import logo from "../assets/menu-logo.svg";
 import Nav from 'react-bootstrap/Nav';
 import _ from "lodash";
-import {Dropdown} from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { Link, useLocation } from 'react-router-dom';
 import AddeditJob from '../components/add-job-post';
@@ -13,7 +13,7 @@ import Overlay from 'react-bootstrap/Overlay';
 import Popover from 'react-bootstrap/Popover';
 import JuniorAnniversaryPost from '../components/add-junioranniversary';
 import { useFetchCollection } from "../components/getfirebasedata";
-import {  doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import SeniorAnniversaryPost from "../components/add-senioranniversary";
 
@@ -39,7 +39,6 @@ function Menubar() {
 
   const closeJuniorModal = (data) => {
     setJuniorToast(true);
-    console.log("dta", data);
     setshowJuniorModal(data);
     setTimeout(() => {
       setJuniorToast(false)
@@ -83,19 +82,19 @@ function Menubar() {
       >
         {/* <Navbar.Brand href="/home"> */}
         {location.pathname === "/home" ? (
-            <Nav className="container-fluid">
-                <img style={{ float: "left" }} src={logo} alt="logo" width="127" height="44" />
-                <Dropdown>
-                  <Dropdown.Toggle className="logout-btn ">
-                  {Logindata && Logindata[0].username}
-                  </Dropdown.Toggle>
+          <Nav className="container-fluid">
+            <img style={{ float: "left" }} src={logo} alt="logo" width="127" height="44" />
+            <Dropdown>
+              <Dropdown.Toggle className="logout-btn ">
+                {Logindata && Logindata[0].username}
+              </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
-                    <Dropdown.Item>{Logindata && Logindata[0].emailid}</Dropdown.Item>
-                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-            </Nav>
+              <Dropdown.Menu>
+                <Dropdown.Item>{Logindata && Logindata[0].emailid}</Dropdown.Item>
+                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Nav>
         ) : (
           <i className="mgc_arrow_left_line p-l-24 mobile-view"></i>
         )}
@@ -155,8 +154,15 @@ function Menubar() {
                   <Popover id="popover-contained">
                     <Popover.Header className="custom-display-none" as="h3"></Popover.Header>
                     <Popover.Body>
-                      <p className="popover-p" onClick={() => setshowJuniorModal(true)}>Junior</p>
-                      <p className="popover-p" onClick={() => setshowSeniorModal(true)}>Senior</p>
+                      <p className="popover-p" onClick={() => {
+                        setshowJuniorModal(true);
+                        setPopoverShow(false);
+                      }}>Junior</p>
+                      <p className="popover-p" onClick={() => {
+                        setshowSeniorModal(true);
+                        setPopoverShow(false);
+                      }
+                      }>Senior</p>
                     </Popover.Body>
                   </Popover>
                 </Overlay>

@@ -1893,7 +1893,15 @@ textarea.form-control {
   transform: rotate(-6.71deg) !important;
 }
 
-
+.preview-img-align {
+  vertical-align: middle;
+  margin-left: -31px;
+  height: 40px;
+  width: 40px;
+  border: 1px solid #EEEEEE !important;
+  border-radius: 8px !important;
+  cursor: pointer;
+}
 
 .greeting-container-download {
   width: 100%;

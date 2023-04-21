@@ -70,7 +70,6 @@ export default function JuniorAnniversaryPost(props) {
     const existingData = JSON.parse(localStorage.getItem("JuniorAnniversaryList")) || [];
 
     existingData.unshift(data);
-    console.log(existingData);
     localStorage.setItem("JuniorAnniversaryList", JSON.stringify(existingData));
     navigate('/anniversarylist', { replace: true, state: { title: "Work anniversary", data: localStorage.getItem('JuniorAnniversaryList') } })
     props.closeJuniorModal(false);

@@ -33,7 +33,6 @@ const { fbdbdata: Logindata } = useFetchCollection("loginDetails");
       setLoginSuccess(false)
     }, 1500);
   },[loginSuccess]);
-console.log("Logindata",Logindata);
   return (
     <AppContext.Provider value={{loginSuccess, handleLoginSuccess, Logindata}}>
     <div className="App">

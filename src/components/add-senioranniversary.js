@@ -22,14 +22,15 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function SeniorAnniversaryPost(props) {
+    const [dataurl, setdataurl] = useState(false);
     const schema = yup.object().shape({
         empimage: yup.string().required("Please select employee image"),
-        empimgurl:yup.string().required("Please selcet employee image"),
         empname: yup.string().required("Please enter employee name"),
         position: yup.string().required("Please enter employee position"),
         years: yup.string().required("Please enter employee years"),
         wishes: yup.string().required("Please enter wishes")
     })
+    const [checkImg, setCheckImg] = useState();
     const navigate = useNavigate();
     const { showModal, title } = props;
     const [showAddnew, setAddnew] = useState(true);
@@ -73,11 +74,12 @@ export default function SeniorAnniversaryPost(props) {
         existingData.unshift(data);
         console.log(existingData);
         localStorage.setItem("SeniorAnniversaryList", JSON.stringify(existingData));
-        navigate('/anniversarylist', { replace: true, state: {title: "Work anniversary" , data: localStorage.getItem('SeniorAnniversaryList') } })
+        navigate('/anniversarylist', { replace: true, state: { title: "Work anniversary", data: localStorage.getItem('SeniorAnniversaryList') } })
         props.closeSeniorModal(false);
     };
 
     const handleImageChange = (e) => {
+        setdataurl(true);
         const file = e.target.files[0];
         const reader = new FileReader();
         const image = new Image();
@@ -112,6 +114,7 @@ export default function SeniorAnniversaryPost(props) {
 
                 // Update the form values with the compressed data URL
                 setValue(`senior.empimgurl`, compressedDataUrl);
+                document.getElementById('preview-img').src = compressedDataUrl;
             };
             image.src = event.target.result;
         };
@@ -174,13 +177,14 @@ export default function SeniorAnniversaryPost(props) {
                                                     className="form-control form-input-file-senior"
                                                     onChange={(e) => handleImageChange(e)}
                                                 />
-                                                {!_.isNil(fields.empimgurl) ? (
+
+                                                {dataurl ? (
                                                     <img
-                                                        src={fields.empimgurl}
-                                                        height="30"
-                                                        alt={"emp img"}
-                                                        htmlFor='img'
-                                                    />
+                                                        id="preview-img"
+                                                        src=""
+                                                        alt="Preview mage"
+                                                        className="preview-img-align"
+                                                        height="30" />
                                                 ) : (
                                                     <span className="mgc_pic_line"
                                                         htmlFor='quote'></span>
@@ -273,7 +277,7 @@ export default function SeniorAnniversaryPost(props) {
                                                     id="wishes"
                                                     placeholder="wishes"
                                                 />
-                                                {errors.quote && (
+                                                {errors.wishes && (
                                                     <span className="error-span">{errors.wishes.message}</span>
                                                 )}
                                             </div>

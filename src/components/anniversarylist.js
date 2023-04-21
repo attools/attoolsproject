@@ -78,7 +78,7 @@ export default function AnniversaryList() {
   return (
     <div className="">
       {showAlert &&
-        <AppToast showAleart={showAlert} icon="mgc_check_circle_fill" message={`${seniorName} post deleted successfully`} />}
+        <AppToast showAleart={showAlert} icon="mgc_check_circle_fill" message={`${seniorName}'s anniversary post deleted successfully`} />}
       {deleteAlert &&
         (<AppToast showAleart={deleteAlert} icon="mgc_check_circle_fill" message={`${moment(`${at}`).format("LLL")} post deleted successfully`} />)}
       {enableempty ? <SkeletonPage /> : (JuniorAnniversaryList.length === 0 || JuniorAnniversaryList === "[]") && (SeniorAnniversaryList.length === 0 || SeniorAnniversaryList === "[]") ? (

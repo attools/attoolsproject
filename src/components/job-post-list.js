@@ -19,7 +19,7 @@ export default function Joblistpage() {
   const [roleName, setRolename] = useState(null);
   const [enableempty, setEmpty] = useState(true);
   // const {jobList} = useSelector((state) => state.joblist);
-  console.log("job list :",jobListArr);
+  
   const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {

@@ -30,7 +30,7 @@ export default function SeniorAnniversaryPost(props) {
         years: yup.string().required("Please enter employee years"),
         wishes: yup.string().required("Please enter wishes")
     })
-    console.log(schema.empimage);
+
     const [checkImg, setCheckImg] = useState();
     const navigate = useNavigate();
     const { showModal, title } = props;
@@ -73,7 +73,6 @@ export default function SeniorAnniversaryPost(props) {
         const existingData = JSON.parse(localStorage.getItem("SeniorAnniversaryList")) || [];
 
         existingData.unshift(data);
-        console.log(existingData);
         localStorage.setItem("SeniorAnniversaryList", JSON.stringify(existingData));
         navigate('/anniversarylist', { replace: true, state: { title: "Work anniversary", data: localStorage.getItem('SeniorAnniversaryList') } })
         props.closeSeniorModal(false);

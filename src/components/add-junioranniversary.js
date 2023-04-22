@@ -62,7 +62,6 @@ export default function JuniorAnniversaryPost(props) {
   const closeAddDialog = () => {
     props.closejuniorDialog(false);
   };
-  console.log('errorMsg', errors?.juniordetails?.empimage);
   const onSubmit = async (data) => {
     data['createdt'] = new Date();
     data['type'] = "Junior";
@@ -74,6 +73,7 @@ export default function JuniorAnniversaryPost(props) {
     navigate('/anniversarylist', { replace: true, state: { title: "Work anniversary", data: localStorage.getItem('JuniorAnniversaryList') } })
     props.closeJuniorModal(false);
   };
+
   const handleImageChange = (e, index) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -109,6 +109,15 @@ export default function JuniorAnniversaryPost(props) {
 
         // Update the form values with the compressed data URL
         setValue(`juniordetails.${index}.empimgurl`, compressedDataUrl);
+        if(index === fields.length - 1 && showAddnew){
+          append({
+            empimage:null,
+            empname:null,
+            empdesignation:null
+          });
+          const values = getValues();
+          setAddnew(values.juniordetails.length === 6 ? false :true);
+        }
       };
       image.src = event.target.result;
     };
@@ -222,11 +231,11 @@ export default function JuniorAnniversaryPost(props) {
                                         src={fields[index].empimgurl}
 
                                         height="30"
-                                        alt={`Employee Image ${index}`}
+                                        alt={`Employee ${index}`}
                                       />
                                     ) : (
                                       <span className={errors?.juniordetails?.[index]
-                                        ?.empimage?.message ? 'mgc_pic_line_error' : 'mgc_pic_line'}>
+                                        ?.empimgurl?.message ? 'mgc_pic_line_error' : 'mgc_pic_line'}>
                                       </span>
                                     )}
                                   </TableCell>

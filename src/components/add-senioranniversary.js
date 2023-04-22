@@ -30,6 +30,7 @@ export default function SeniorAnniversaryPost(props) {
         years: yup.string().required("Please enter employee years"),
         wishes: yup.string().required("Please enter wishes")
     })
+    console.log(schema.empimage);
     const [checkImg, setCheckImg] = useState();
     const navigate = useNavigate();
     const { showModal, title } = props;
@@ -170,14 +171,15 @@ export default function SeniorAnniversaryPost(props) {
                                                 <input
                                                     type="file"
                                                     {...register(
-                                                        `empimage`
+                                                        'empimage', {
+                                                        required: true,
+                                                    }
                                                     )}
                                                     id='img'
                                                     accept="image/png, image/jpeg"
                                                     className="form-control form-input-file-senior"
                                                     onChange={(e) => handleImageChange(e)}
                                                 />
-
                                                 {dataurl ? (
                                                     <img
                                                         id="preview-img"
@@ -187,8 +189,16 @@ export default function SeniorAnniversaryPost(props) {
                                                         height="30" />
                                                 ) : (
                                                     <span className="mgc_pic_line"
-                                                        htmlFor='quote'></span>
+                                                        htmlFor='quote'>
+                                                    </span>
                                                 )}
+                                                {errors.empimage &&
+                                                    <span className="error-span">
+                                                        {
+                                                            errors.empimage.message
+                                                        }
+                                                    </span>
+                                                }
                                             </Col>
                                         </Col>
                                     </Row>
@@ -301,6 +311,6 @@ export default function SeniorAnniversaryPost(props) {
                     </Dialog>
                 )}
             </div>
-        </React.Fragment>
+        </React.Fragment >
     );
 }

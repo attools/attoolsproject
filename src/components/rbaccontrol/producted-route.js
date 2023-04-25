@@ -1,6 +1,4 @@
 import { Navigate } from "react-router";
-import { useFetchCollection } from "../getfirebasedata";
-import _ from "lodash";
 import { useContext } from "react";
 import { AppContext } from "../../App";
 

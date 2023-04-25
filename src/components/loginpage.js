@@ -71,7 +71,7 @@ export default function LoginPage() {
         navigate('/home')
       }
     }
-  }, [Logindata])
+  }, [Logindata,navigate])
 
   return (
     <React.Fragment>
@@ -160,12 +160,12 @@ export default function LoginPage() {
                 <Col className="p-a-12">
                   <p className="login-terms">
                     By signing in you agree to the and{" "}
-                    <a href="#" target="_blank" className="login-terms-a">
+                    <a href target="_blank" className="login-terms-a">
                       Terms of Service
                     </a>{" "}
                     <br />
                     and{" "}
-                    <a href="#" className="login-terms-a" target="_blank">
+                    <a href className="login-terms-a" target="_blank">
                       Privacy Policy
                     </a>
                   </p>

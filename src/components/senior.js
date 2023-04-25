@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Card from "react-bootstrap/Card";
 import cardlogo from '../assets/tenant-logo.png';
@@ -16,7 +16,7 @@ import AppToast from './app-toast';
 
 
 const Senior = (props) => {
-    const { createdt, type, seniordetails, empname, wishes, years, position, senior } = props.anniversaryitemssenior;
+    const { createdt, type,  empname, wishes, years, position, senior } = props.anniversaryitemssenior;
     const itemIndex = props.itemIndex
     const [showLoader, setLoader] = useState(false);
     const [showDelete, setDelete] = useState(false);
@@ -26,19 +26,18 @@ const Senior = (props) => {
     function nth(i) {
         var j = i % 10,
             k = i % 100;
-        if (j == 1 && k != 11) {
+        if (j === 1 && k !== 11) {
             return "st";
         }
-        if (j == 2 && k != 12) {
+        if (j === 2 && k !== 12) {
             return "nd";
         }
-        if (j == 3 && k != 13) {
+        if (j === 3 && k !== 13) {
             return "rd";
         }
         return "th";
     }
 
-    const [lg, setLg] = useState();
 
     const downloadAnniversary = () => {
         setLoader(true);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col,Row } from 'react-bootstrap';
 import Card from "react-bootstrap/Card";
 import cardlogo from '../assets/tenant-logo.png';
 import * as htmlToImage from 'html-to-image';
@@ -108,6 +108,7 @@ const Junior = (props) => {
                                                 width="59px"
                                                 height="59px"
                                                 src={detail.empimgurl}
+                                                alt='img'
                                             />
                                             <div className='anniversary-name'>{detail.empname}</div>
                                             <div className='anniversary-role'>{detail.empdesignation}</div>
@@ -151,7 +152,7 @@ const Junior = (props) => {
                 <div className='download-imgs' id={createdt}>
                     <div className='download-junior'>
                         <Row>
-                            <span className='align-head'><img src={cardlogo} width="250" /></span>
+                            <span className='align-head'><img src={cardlogo} width="250" alt={cardlogo}/></span>
                         </Row>
                         <Row>
                             <Col sm="12" lg="12" xs="12" md="12">
@@ -171,6 +172,7 @@ const Junior = (props) => {
                                         width="185px"
                                         height="185px"
                                         src={details.empimgurl}
+                                        alt='img'
                                     />
                                     <div className='download-name'>{details.empname}</div>
                                     <div className='download-role'>{details.empdesignation}</div>

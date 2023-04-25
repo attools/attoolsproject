@@ -7,16 +7,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Container from "react-bootstrap/Container";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import _ from "lodash";
 import { useNavigate } from "react-router-dom";
 
 
@@ -30,16 +24,11 @@ export default function SeniorAnniversaryPost(props) {
         years: yup.string().required("Please enter employee years"),
         wishes: yup.string().required("Please enter wishes")
     })
-
-    const [checkImg, setCheckImg] = useState();
     const navigate = useNavigate();
     const { showModal, title } = props;
-    const [showAddnew, setAddnew] = useState(true);
     const {
         register,
-        control,
         handleSubmit,
-        getValues,
         setValue,
         formState: { errors },
     } = useForm({
@@ -57,10 +46,6 @@ export default function SeniorAnniversaryPost(props) {
             ],
         },
         resolver: yupResolver(schema)
-    });
-    const { fields, append, remove } = useFieldArray({
-        control,
-        name: "seniordetails",
     });
     const closeAddDialog = () => {
         props.closeseniorDialog(false);
